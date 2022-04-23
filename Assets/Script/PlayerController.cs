@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
         }
         if( Input.GetMouseButton(0) && rb.velocity.y < 0)
         {
-            rb.AddForce(Vector2.up * Time.deltaTime * liftingForce);
+            rb.AddForce(Vector2.up * Time.deltaTime * liftingForce * -rb.velocity.y);
         }
     }
 
@@ -50,6 +50,12 @@ public class PlayerController : MonoBehaviour
         if(collision.CompareTag("Obstacle"))
         {
             GameManager.instance.GameOver();
+        }
+        else if(collision.CompareTag("Coin"))
+        {
+            GameManager.instance.CoinCollected();
+            // do zrobienia: animacja znikania (za pomoc¹ prefaba)
+            Destroy(collision.gameObject);
         }
     }
 
