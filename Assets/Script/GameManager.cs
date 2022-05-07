@@ -33,12 +33,22 @@ public class GameManager : MonoBehaviour
     [SerializeField] Text coinText;
     [SerializeField] GameObject resetButton;
 
+    // Powerups
+    public Immortality immortality;
+    public Magnet magnet;
+
     void Start()
     {
+        //PlayerPrefs.DeleteAll();
+
         coins = PlayerPrefs.GetInt("Coins", 0);
         highScore = PlayerPrefs.GetInt("HighScore", 0);
 
         coinText.text = coins.ToString();
+
+        SceneManager.sceneUnloaded += s => PlayerPrefs.SetInt("HighScore", highScore);
+
+        immortality.isActive = false;
     }
 
     void FixedUpdate()
@@ -54,14 +64,13 @@ public class GameManager : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        PlayerPrefs.SetInt("HighScore", highScore);
+       PlayerPrefs.SetInt("HighScore", highScore);
     }
 
     public void GameOver()
     {
         Time.timeScale = 0;
         resetButton.SetActive(true);
-        PlayerPrefs.SetInt("HighScore", highScore);
     }
 
     public void Reset()
@@ -75,5 +84,39 @@ public class GameManager : MonoBehaviour
         coins++;
         PlayerPrefs.SetInt("Coins", coins);
         coinText.text = coins.ToString();
+    }
+
+    public void BatteryCollected()
+    {
+        if(immortality.isActive)
+        {
+            CancelBattery();
+            CancelInvoke(nameof(CancelBattery));
+        }
+
+        immortality.isActive = true;
+        worldScrollingSpeed += immortality.speedBoost;
+        Invoke(nameof(CancelBattery), immortality.duration);
+    }
+
+    private void CancelBattery()
+    {
+        worldScrollingSpeed -= immortality.speedBoost;
+        immortality.isActive = false;
+    }
+
+    public void MagnetCollected()
+    {
+        if(magnet.isActive)
+        { 
+            CancelInvoke(nameof(CancelMagnet));
+        }
+        magnet.isActive = true;
+        Invoke(nameof(CancelMagnet), magnet.duration);
+    }
+
+    private void CancelMagnet()
+    {
+        magnet.isActive = false;
     }
 }

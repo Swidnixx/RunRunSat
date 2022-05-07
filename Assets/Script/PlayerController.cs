@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Obstacle"))
+        if(collision.CompareTag("Obstacle") && !GameManager.instance.immortality.isActive )
         {
             GameManager.instance.GameOver();
         }
@@ -56,6 +56,16 @@ public class PlayerController : MonoBehaviour
             GameManager.instance.CoinCollected();
             // do zrobienia: animacja znikania (za pomoc¹ prefaba)
             Destroy(collision.gameObject);
+        }
+        else if(collision.CompareTag("Battery"))
+        {
+            Destroy(collision.gameObject);
+            GameManager.instance.BatteryCollected();
+        }
+        else if(collision.CompareTag("Magnet"))
+        {
+            Destroy(collision.gameObject);
+            GameManager.instance.MagnetCollected();
         }
     }
 
