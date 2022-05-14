@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Magnet1
   m_EditorClassIdentifier: 
   isActive: 0
-  duration: 3
-  range: 1
-  coinSpeed: 1
+  duration: 5
+  range: 4.5
+  coinSpeed: 16
