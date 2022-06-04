@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class Powerup : ScriptableObject
 {
-    //[HideInInspector]
+    [HideInInspector]
     public bool isActive;
     public float duration = 1;
 

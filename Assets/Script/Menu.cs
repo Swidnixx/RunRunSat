@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class Menu : MonoBehaviour
 {
+    public Text soundText;
     public Text coinsText;
     public Text highscoreText;
 
@@ -36,6 +37,8 @@ public class Menu : MonoBehaviour
     {
         shopPanel.SetActive(false);
         menuPanel.SetActive(true);
+        coins = PlayerPrefs.GetInt("Coins", 0);
+        coinsText.text = coins.ToString();
     }
 
     public void PlayButton()
@@ -45,7 +48,15 @@ public class Menu : MonoBehaviour
 
     public void SoundButton()
     {
-
+        SoundManager.instance.ToggleMuted();
+        if(SoundManager.instance.muted)
+        {
+            soundText.text = "Sound On";
+        }
+        else
+        {
+            soundText.text = "Sound Off";
+        }
     }
 
     public void ExitGame()

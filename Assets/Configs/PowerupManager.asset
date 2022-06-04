@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cb04103679ca7d45b60ca41bb01fb82, type: 3}
+  m_Name: PowerupManager
+  m_EditorClassIdentifier: 
+  battery: {fileID: 11400000, guid: d845245e74ba1844c8f4e08a0ff63faf, type: 2}
+  magnet: {fileID: 11400000, guid: 43c4c9f588503e44abac52f20a95a1c6, type: 2}

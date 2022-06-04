@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
             if ( !jumped )
             {
                 // pierwszy skok
+                SoundManager.instance.PlayJumpSfx();
                 rb.velocity = Vector2.up * jumpForce;
                 jumped = true; 
             }

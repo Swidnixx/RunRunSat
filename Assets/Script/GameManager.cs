@@ -34,12 +34,18 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject resetButton;
 
     // Powerups
+    public PowerupManager powerupManager;
     public Immortality immortality;
     public Magnet magnet;
 
     void Start()
     {
         //PlayerPrefs.DeleteAll();
+        immortality = powerupManager.battery;
+        magnet = powerupManager.magnet;
+
+        immortality.isActive = false;
+        magnet.isActive = false;
 
         coins = PlayerPrefs.GetInt("Coins", 0);
         highScore = PlayerPrefs.GetInt("HighScore", 0);
@@ -47,8 +53,6 @@ public class GameManager : MonoBehaviour
         coinText.text = coins.ToString();
 
         SceneManager.sceneUnloaded += s => PlayerPrefs.SetInt("HighScore", highScore);
-
-        immortality.isActive = false;
     }
 
     void FixedUpdate()
